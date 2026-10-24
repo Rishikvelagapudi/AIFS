@@ -16,8 +16,18 @@ export default function LandingPage({ onSelectPage, activePage = "landing" }) {
       {/* High-Performance Red Sparks & Starlight Particle System */}
       <RedSparksCanvas />
 
-      {/* Reserved Top Margin / Slot for Upcoming Title */}
-      <div className="landing-top-title-slot" aria-label="Reserved Title Area"></div>
+      {/* Sovereign Top Title Banner: VIKSIT BHARAT */}
+      <div className="landing-top-title-slot" aria-label="Viksit Bharat Title Banner">
+        <div className="viksit-bharat-top-banner">
+          <div className="vb-banner-decor-line left" />
+          <div className="vb-title-pill">
+            <span className="vb-star-icon">✦</span>
+            <h1 className="vb-title-text">VIKSIT BHARAT</h1>
+            <span className="vb-star-icon">✦</span>
+          </div>
+          <div className="vb-banner-decor-line right" />
+        </div>
+      </div>
 
       {/* Top Dignitaries in Circular Gold Frames */}
       <header className="landing-leaders-header">
