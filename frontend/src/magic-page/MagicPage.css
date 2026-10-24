@@ -1,0 +1,1035 @@
+/* ==========================================================================
+   AIFS MAGIC REALM & 3D MAGIC BOXES STYLES
+   ========================================================================== */
+
+.magic-realm-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 20%, #1a0836 0%, #0c031c 55%, #05010a 100%);
+  color: #ffffff;
+  overflow-x: hidden;
+  user-select: none;
+  cursor: none; /* Default cursor hidden in favor of Magic Wand */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 24px 20px 40px 20px;
+}
+
+/* Make all interactive elements also use cursor none so custom wand stays visible */
+.magic-realm-container * {
+  cursor: none !important;
+}
+
+/* -------------------------------------------------------------
+   MAGIC WAND CURSOR & PARTICLE TRAIL
+   ------------------------------------------------------------- */
+.magic-particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.magic-wand-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform-origin: 36px 14px; /* Tip of wand */
+  transition: transform 0.08s ease-out;
+  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 24px rgba(217, 70, 239, 0.5));
+}
+
+.magic-wand-cursor.clicking {
+  transform: scale(0.92) rotate(-15deg);
+}
+
+.wand-tip-flare {
+  position: absolute;
+  top: 6px;
+  left: 28px;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #ffffff 10%, #00e5ff 60%, transparent 100%);
+  border-radius: 50%;
+  animation: wandFlarePulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes wandFlarePulse {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.4); opacity: 1; filter: drop-shadow(0 0 10px #ffe066); }
+}
+
+/* -------------------------------------------------------------
+   AMBIENT BACKGROUND FX
+   ------------------------------------------------------------- */
+.magic-ambient-aurora {
+  position: absolute;
+  top: -10%;
+  left: 10%;
+  width: 80%;
+  height: 450px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.28), rgba(0, 229, 255, 0.15) 45%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+  animation: auroraDrift 16s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift {
+  0% { transform: translate(-30px, 0px) scale(1); }
+  50% { transform: translate(30px, 30px) scale(1.08); }
+  100% { transform: translate(-20px, 50px) scale(0.95); }
+}
+
+.magic-runes-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(147, 51, 234, 0.12) 1px, transparent 1px),
+    radial-gradient(rgba(0, 229, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px;
+  background-position: 0 0, 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* -------------------------------------------------------------
+   HEADER & TOP NAVIGATION
+   ------------------------------------------------------------- */
+.magic-top-nav {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1360px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.magic-nav-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(26, 11, 46, 0.75);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 24px;
+  color: #ffdf79;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.magic-nav-back-btn:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #ffd700;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+}
+
+.magic-sound-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: rgba(18, 7, 34, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 20px;
+  color: #00e5ff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.magic-sound-toggle-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00e5ff;
+  color: #ffffff;
+}
+
+/* -------------------------------------------------------------
+   MAGIC TITLE & KICKER
+   ------------------------------------------------------------- */
+.magic-hero-section {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.magic-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffb703;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(255, 183, 3, 0.6);
+}
+
+.magic-kicker-spark {
+  animation: sparkTwinkle 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes sparkTwinkle {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.7; }
+  100% { transform: scale(1.3) rotate(45deg); opacity: 1; filter: drop-shadow(0 0 6px #ffd700); }
+}
+
+.magic-hero-title {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  margin: 0 0 12px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 30%, #00e5ff 60%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 20px rgba(0, 229, 255, 0.35));
+}
+
+.magic-hero-tagline {
+  font-size: 15px;
+  color: #c4b5fd;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.magic-wand-instruction {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 5px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(217, 70, 239, 0.4);
+  border-radius: 16px;
+  font-size: 12px;
+  color: #f0abfc;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* -------------------------------------------------------------
+   3D MAGIC STAGE & TWIN 3D BOXES
+   ------------------------------------------------------------- */
+.magic-boxes-stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 50px;
+  margin: 20px auto 30px auto;
+  perspective: 1400px; /* Perspective container for full 3D visual depth */
+  flex-wrap: wrap;
+}
+
+/* Individual 3D Card / Box Wrapper */
+.magic-box-3d-scene {
+  flex: 1;
+  min-width: 380px;
+  max-width: 520px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.magic-box-card {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  border-radius: 28px;
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease-out, box-shadow 0.3s ease;
+  padding: 36px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  animation: magicBoxFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes magicBoxFloat {
+  0% { transform: translateY(0px) rotateX(1deg); }
+  50% { transform: translateY(-12px) rotateX(-1deg); }
+  100% { transform: translateY(4px) rotateX(0deg); }
+}
+
+/* -------------------------------------------------------------
+   OPEN MAGIC BOX (MATCHING UPLOADED IMAGE AESTHETIC)
+   ------------------------------------------------------------- */
+.magic-open-box-stage {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  transform-style: preserve-3d;
+}
+
+.magic-open-box-visual {
+  position: relative;
+  width: 210px;
+  height: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.magic-box-card:hover .magic-open-box-visual {
+  transform: translateZ(55px) scale(1.08) translateY(-10px);
+}
+
+.magic-box-img-asset {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 35px rgba(255, 183, 3, 0.5));
+  transition: filter 0.3s ease;
+}
+
+.box-viksit .magic-box-img-asset {
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.65));
+}
+
+.box-viksit-bharat .magic-box-img-asset,
+.box-aifs .magic-box-img-asset {
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 40px rgba(255, 153, 51, 0.65));
+}
+
+.magic-box-card:hover .magic-box-img-asset {
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 55px rgba(255, 215, 0, 0.9));
+}
+
+/* Bursting stars and rays emerging from open box */
+.box-burst-fx-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+/* Upward radiant energy beam */
+.box-energy-pillar {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 140px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 215, 0, 0.45), rgba(0, 229, 255, 0.25) 50%, transparent 80%);
+  filter: blur(12px);
+  pointer-events: none;
+  animation: pillarFlicker 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes pillarFlicker {
+  0% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 0.95; transform: translateX(-50%) scale(1.08); }
+}
+
+/* Floating illustrated stars matching the image */
+.burst-star {
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
+}
+
+.burst-star-center {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  animation: starFloatCenter 3s infinite alternate ease-in-out;
+}
+
+@keyframes starFloatCenter {
+  0% { transform: translateX(-50%) translateY(0px) rotate(0deg) scale(1); }
+  100% { transform: translateX(-50%) translateY(-14px) rotate(18deg) scale(1.15); filter: drop-shadow(0 0 14px #00e5ff); }
+}
+
+.burst-star-left {
+  top: 48px;
+  left: 28px;
+  width: 32px;
+  height: 32px;
+  animation: starFloatLeft 3.5s infinite alternate ease-in-out;
+}
+
+@keyframes starFloatLeft {
+  0% { transform: translateY(0px) rotate(-10deg) scale(0.95); }
+  100% { transform: translateY(-12px) rotate(15deg) scale(1.1); filter: drop-shadow(0 0 12px #d946ef); }
+}
+
+.burst-star-right {
+  top: 50px;
+  right: 28px;
+  width: 32px;
+  height: 32px;
+  animation: starFloatRight 3.2s infinite alternate ease-in-out;
+}
+
+@keyframes starFloatRight {
+  0% { transform: translateY(0px) rotate(10deg) scale(0.95); }
+  100% { transform: translateY(-12px) rotate(-15deg) scale(1.1); filter: drop-shadow(0 0 12px #ff2a6d); }
+}
+
+/* Floating Gems */
+.burst-gem {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ff2a6d;
+  border: 2px solid #2d001e;
+  border-radius: 3px;
+  transform: rotate(45deg);
+  animation: gemGlint 2s infinite alternate ease-in-out;
+}
+
+.burst-gem-cyan {
+  background: #00e5ff;
+  border-color: #032130;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+@keyframes gemGlint {
+  0% { transform: rotate(45deg) scale(0.9); opacity: 0.8; }
+  100% { transform: rotate(65deg) scale(1.2); opacity: 1; filter: drop-shadow(0 0 8px #ffffff); }
+}
+
+/* Burst Radiating Ray Lines */
+.burst-ray-line {
+  position: absolute;
+  background: #4a1525;
+  border-radius: 3px;
+}
+
+.ray-top {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 22px;
+}
+
+.ray-left {
+  top: 60px;
+  left: 8px;
+  width: 22px;
+  height: 4px;
+}
+
+.ray-right {
+  top: 60px;
+  right: 8px;
+  width: 22px;
+  height: 4px;
+}
+
+/* Card Themes */
+.box-viksit {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 183, 3, 0.22) 0%, rgba(42, 20, 5, 0.88) 55%, rgba(18, 8, 3, 0.96) 100%);
+  border: 2px solid rgba(255, 183, 3, 0.55);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.85),
+    0 0 45px rgba(255, 183, 3, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 0 35px rgba(255, 183, 3, 0.15);
+}
+
+.box-viksit:hover {
+  border-color: #ffd700;
+  box-shadow: 
+    0 35px 85px rgba(0, 0, 0, 0.95),
+    0 0 70px rgba(255, 215, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 55px rgba(255, 183, 3, 0.3);
+}
+
+.box-viksit-bharat,
+.box-aifs {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 153, 51, 0.22) 0%, rgba(10, 25, 47, 0.9) 55%, rgba(4, 13, 26, 0.98) 100%);
+  border: 2px solid rgba(255, 153, 51, 0.55);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.85),
+    0 0 45px rgba(255, 153, 51, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 0 35px rgba(0, 229, 255, 0.15);
+}
+
+.box-viksit-bharat:hover,
+.box-aifs:hover {
+  border-color: #ff9933;
+  box-shadow: 
+    0 35px 85px rgba(0, 0, 0, 0.95),
+    0 0 70px rgba(255, 153, 51, 0.55),
+    0 0 35px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 55px rgba(0, 229, 255, 0.25);
+}
+
+/* Floating Gems Sovereign Variants */
+.burst-gem-saffron {
+  background: #ff9933 !important;
+  border-color: #3d1c00 !important;
+}
+
+.burst-gem-green {
+  background: #10b981 !important;
+  border-color: #032b1a !important;
+}
+
+/* Subtle Ethereal Title Floating Badge on Hover */
+.magic-box-hover-title {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: rgba(15, 6, 28, 0.92);
+  padding: 8px 18px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  z-index: 20;
+}
+
+.magic-box-card:hover .magic-box-hover-title {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.box-viksit .magic-box-hover-title {
+  border: 1px solid rgba(255, 215, 0, 0.55);
+  box-shadow: 0 8px 25px rgba(255, 183, 3, 0.4);
+}
+
+.box-viksit-bharat .magic-box-hover-title,
+.box-aifs .magic-box-hover-title {
+  border: 1px solid rgba(255, 153, 51, 0.55);
+  box-shadow: 0 8px 25px rgba(255, 153, 51, 0.4);
+}
+
+.hover-title-main {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.hover-title-sub {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: #94a3b8;
+}
+
+/* Button overrides for Viksit and AIFS */
+.box-viksit .cast-spell-btn {
+  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 50%, #b45309 100%);
+  color: #1a0800;
+  box-shadow: 0 8px 30px rgba(255, 183, 3, 0.5);
+  font-weight: 900;
+}
+
+.box-viksit .cast-spell-btn:hover {
+  background: linear-gradient(135deg, #fffbeb 0%, #fde047 50%, #f59e0b 100%);
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 45px rgba(255, 215, 0, 0.8);
+}
+
+.box-aifs .cast-spell-btn {
+  background: linear-gradient(135deg, #00e5ff 0%, #0284c7 50%, #1e1b4b 100%);
+  color: #020817;
+  box-shadow: 0 8px 30px rgba(0, 229, 255, 0.5);
+  font-weight: 900;
+}
+
+.box-aifs .cast-spell-btn:hover {
+  background: linear-gradient(135deg, #e0f2fe 0%, #38bdf8 50%, #00e5ff 100%);
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 45px rgba(0, 229, 255, 0.8);
+}
+
+.box-viksit .box-module-tag {
+  background: rgba(255, 183, 3, 0.16);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.45);
+}
+
+.box-aifs .box-module-tag {
+  background: rgba(0, 229, 255, 0.16);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.45);
+}
+
+.box-viksit .box-title {
+  text-shadow: 0 0 25px rgba(255, 183, 3, 0.6);
+  font-size: 28px;
+}
+
+.box-aifs .box-title {
+  text-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
+  font-size: 28px;
+}
+
+/* -------------------------------------------------------------
+   3D FLOATING HOLOGRAPHIC CORE & LID EFFECTS
+   ------------------------------------------------------------- */
+.box-hologram-stage {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  margin-bottom: 12px;
+}
+
+.hologram-pedestal {
+  position: absolute;
+  bottom: 0;
+  width: 140px;
+  height: 24px;
+  border-radius: 50%;
+  transform: rotateX(65deg) translateZ(-20px);
+  filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.box-guardian .hologram-pedestal {
+  background: radial-gradient(circle, #00e5ff 0%, rgba(0, 229, 255, 0.4) 50%, transparent 80%);
+  box-shadow: 0 0 25px #00e5ff;
+}
+
+.box-oracle .hologram-pedestal {
+  background: radial-gradient(circle, #ffb703 0%, rgba(217, 70, 239, 0.5) 50%, transparent 80%);
+  box-shadow: 0 0 25px #ffd700;
+}
+
+/* 3D Spinning Magic Prism / Core */
+.magic-3d-prism-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  transform-style: preserve-3d;
+  animation: prismSpin 10s linear infinite;
+  transform: translateZ(40px);
+}
+
+@keyframes prismSpin {
+  0% { transform: translateZ(40px) rotateX(15deg) rotateY(0deg) rotateZ(0deg); }
+  50% { transform: translateZ(55px) rotateX(-15deg) rotateY(180deg) rotateZ(15deg); }
+  100% { transform: translateZ(40px) rotateX(15deg) rotateY(360deg) rotateZ(0deg); }
+}
+
+.prism-icon-core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.box-guardian .prism-icon-core {
+  background: rgba(0, 229, 255, 0.15);
+  border: 1.5px solid rgba(0, 229, 255, 0.7);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
+  color: #00e5ff;
+}
+
+.box-oracle .prism-icon-core {
+  background: rgba(255, 183, 3, 0.18);
+  border: 1.5px solid rgba(255, 215, 0, 0.7);
+  box-shadow: 0 0 30px rgba(255, 183, 3, 0.6);
+  color: #ffd700;
+}
+
+.prism-energy-ring {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1.5px dashed;
+  animation: ringRotate 8s linear infinite reverse;
+}
+
+.box-guardian .prism-energy-ring {
+  border-color: rgba(0, 229, 255, 0.6);
+}
+
+.box-oracle .prism-energy-ring {
+  border-color: rgba(217, 70, 239, 0.6);
+}
+
+@keyframes ringRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* -------------------------------------------------------------
+   BOX CONTENT & TYPOGRAPHY
+   ------------------------------------------------------------- */
+.box-content-layer {
+  transform: translateZ(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.box-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box-module-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.box-guardian .box-module-tag {
+  background: rgba(0, 229, 255, 0.12);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+
+.box-oracle .box-module-tag {
+  background: rgba(255, 183, 3, 0.12);
+  color: #ffb703;
+  border: 1px solid rgba(255, 183, 3, 0.4);
+}
+
+.box-status-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: liveDotPulse 1.5s infinite;
+}
+
+@keyframes liveDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.box-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.box-guardian .box-title {
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.box-oracle .box-title {
+  text-shadow: 0 0 20px rgba(255, 183, 3, 0.4);
+}
+
+.box-subtitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #a5b4fc;
+  margin: -6px 0 0 0;
+}
+
+.box-description {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Feature Pills Grid */
+.box-features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.box-feature-pill {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* -------------------------------------------------------------
+   3D INTERACTIVE CAST SPELL BUTTON
+   ------------------------------------------------------------- */
+.box-action-layer {
+  transform: translateZ(50px);
+  margin-top: 24px;
+}
+
+.cast-spell-btn {
+  position: relative;
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.box-guardian .cast-spell-btn {
+  background: linear-gradient(135deg, #00e5ff 0%, #0284c7 60%, #1e1b4b 100%);
+  color: #030d22;
+  box-shadow: 0 8px 30px rgba(0, 229, 255, 0.45);
+}
+
+.box-guardian .cast-spell-btn:hover {
+  background: linear-gradient(135deg, #38bdf8 0%, #00e5ff 60%, #0284c7 100%);
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 229, 255, 0.7);
+}
+
+.box-oracle .cast-spell-btn {
+  background: linear-gradient(135deg, #ffd700 0%, #ea580c 60%, #581c87 100%);
+  color: #1a052e;
+  box-shadow: 0 8px 30px rgba(255, 183, 3, 0.45);
+}
+
+.box-oracle .cast-spell-btn:hover {
+  background: linear-gradient(135deg, #ffe066 0%, #ffb703 60%, #ea580c 100%);
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(255, 183, 3, 0.7);
+}
+
+.btn-shimmer-sweep {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-25deg);
+  animation: btnSweep 3.5s infinite;
+}
+
+@keyframes btnSweep {
+  0% { left: -120%; }
+  30%, 100% { left: 140%; }
+}
+
+/* -------------------------------------------------------------
+   BOTTOM TELEPORT BRIDGE (MODULE 3 ACCESS)
+   ------------------------------------------------------------- */
+.magic-bottom-bridge {
+  position: relative;
+  z-index: 10;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.teleport-bridge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  background: rgba(18, 7, 34, 0.65);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 24px;
+  color: #c084fc;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.teleport-bridge-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: #c084fc;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.4);
+}
+
+/* -------------------------------------------------------------
+   CLEAN VIEW (NO TEXT, ONLY BOXES AND WAND CURSOR)
+   ------------------------------------------------------------- */
+.clean-magic-view {
+  min-height: 100vh;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 20px !important;
+  display: flex !important;
+}
+
+.clean-boxes-stage {
+  margin: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 70px !important;
+  width: 100% !important;
+  max-width: 1040px !important;
+  flex-wrap: wrap !important;
+}
+
+.clean-box-card {
+  min-height: 380px !important;
+  width: 100% !important;
+  max-width: 440px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 40px 30px !important;
+  border-radius: 40px !important;
+  cursor: none !important;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+}
+
+.clean-box-card .magic-open-box-stage {
+  height: 280px !important;
+  margin-bottom: 0 !important;
+}
+
+.clean-box-card .magic-open-box-visual {
+  width: 260px !important;
+  height: 260px !important;
+}
+
+.clean-box-card .magic-box-img-asset {
+  width: 230px !important;
+  height: 230px !important;
+}
+
+.magic-minimal-back-btn {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(26, 11, 46, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #c4b5fd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  cursor: none !important;
+}
+
+.magic-minimal-back-btn:hover {
+  background: rgba(255, 215, 0, 0.25);
+  border-color: #ffd700;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 6px 22px rgba(255, 215, 0, 0.45);
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE ADJUSTMENTS
+   ------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .magic-hero-title {
+    font-size: 32px;
+  }
+  .magic-boxes-stage {
+    gap: 30px;
+  }
+  .magic-box-3d-scene {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .magic-box-card {
+    min-height: auto;
+    padding: 28px 20px 24px 20px;
+  }
+}
